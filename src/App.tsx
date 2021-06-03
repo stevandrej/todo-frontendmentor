@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from 'react';
+import AddTodo from './components/AddTodo/AddTodo';
+import TodoList from './components/TodoList/TodoList';
+import { TodoContext } from './store/todo-context';
+import './App.scss';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+	const todosCtx = useContext(TodoContext);
+
+	return (
+		<div className="App">
+			<div className='bg-image'></div>
+			<div className="container">
+				<div className='input-form'>
+					<AddTodo />
+				</div>
+				<TodoList />
+				<button onClick={todosCtx.clearAllCompleted}>Clear All Completed</button>
+			</div>
+		</div>
+	);
 }
 
 export default App;
