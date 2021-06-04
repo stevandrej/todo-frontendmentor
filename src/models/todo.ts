@@ -3,10 +3,10 @@ class Todo {
 	content: string;
 	completed: boolean;
 
-	constructor(content: string) {
+	constructor(content: string, markedComplete: boolean) {
 		this.id = new Date().toISOString();
 		this.content = content;
-		this.completed = false;
+		this.completed = markedComplete;
 	}
 }
 

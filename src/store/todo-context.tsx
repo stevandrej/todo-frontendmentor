@@ -1,3 +1,4 @@
+import { count } from 'console';
 import React, { createContext, useReducer } from 'react';
 import Todo from '../models/todo';
 import reducer, { ADD_TODO, CLEAR_ALL_COMPLETED, MARK_COMPLETED, MARK_INCOMPLETED, REMOVE_TODO } from './TodoReducer';
@@ -10,11 +11,12 @@ enum View {
 
 interface TodoContextObj {
 	todos: Todo[];
-	addTodo: (todoContent: string) => void;
+	addTodo: (todoContent: string, markedComplete: boolean) => void;
 	removeTodo: (id: string) => void;
 	markCompleted: (id: string) => void;
 	markIncompleted: (id: string) => void;
 	clearAllCompleted: () => void;
+	countUncompleted: () => number;
 }
 
 export const TodoContext = createContext<TodoContextObj>({
@@ -23,14 +25,15 @@ export const TodoContext = createContext<TodoContextObj>({
 	removeTodo: () => { },
 	markCompleted: () => { },
 	markIncompleted: () => { },
-	clearAllCompleted: () => { }
+	clearAllCompleted: () => { },
+	countUncompleted: () => { return 0 }
 });
 
 const TodoContextProvider: React.FC = (props) => {
 	const [todos, dispatch] = useReducer(reducer, []);
 
-	const addTodoHandler = (todoContent: string) => {
-		const newTodo = new Todo(todoContent);
+	const addTodoHandler = (todoContent: string, markedComplete: boolean) => {
+		const newTodo = new Todo(todoContent, markedComplete);
 		dispatch({ type: ADD_TODO, payload: newTodo });
 	}
 
@@ -50,13 +53,24 @@ const TodoContextProvider: React.FC = (props) => {
 		dispatch({ type: CLEAR_ALL_COMPLETED })
 	}
 
+	const countUncompleted = () => {
+		let counter = 0;
+		todos.forEach(item => {
+			if (item.completed === false)
+				counter++;
+		});
+
+		return counter;
+	}
+
 	const contextValue: TodoContextObj = {
 		todos: todos,
 		addTodo: addTodoHandler,
 		removeTodo: removeTodoHandler,
 		markCompleted: markCompletedHandler,
 		markIncompleted: markIncompletedHandler,
-		clearAllCompleted: clearAllCompletedHandler
+		clearAllCompleted: clearAllCompletedHandler,
+		countUncompleted: countUncompleted
 	}
 
 	return <TodoContext.Provider value={contextValue}>
