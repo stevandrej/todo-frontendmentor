@@ -34,8 +34,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://todo-frontendmentor.vercel.app)
+- Solution URL: [Add solution URL here](https://www.frontendmentor.io/solutions/todo-app-using-reactjs-and-typescript-E9b2_WQVc)
+- Live Site URL: [Add live site URL here](https://todo-frontendmentor.vercel.app/)
 
 ### Built with
 
