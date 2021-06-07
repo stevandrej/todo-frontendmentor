@@ -1,5 +1,9 @@
 .dark{
-	--bg: hsl(235, 21%, 11%);
-	--items: hsl(237, 14%, 26%);
+	--primary: hsl(235, 21%, 11%);
+	--secondary: hsl(235, 24%, 19%);
 	--text-primary: hsl(234, 39%, 85%);
+	--text-hover: hsl(236, 33%, 92%);
+	--text-secondary: hsl(234, 11%, 52%);
+	--tertiary: hsl(233, 14%, 35%);
+	--quaternary: hsl(237, 14%, 26%);
 }

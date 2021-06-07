@@ -1,0 +1,9 @@
+.light {
+	--primary: hsl(236, 33%, 92%);
+	--secondary: hsl(0, 0%, 98%);
+	--text-primary: hsl(236, 9%, 61%);
+	--text-hover: hsl(235, 24%, 19%);
+	--text-secondary: hsl(233, 11%, 84%);
+	--tertiary: hsl(236, 10%, 70%);
+	--quaternary: hsl(236, 33%, 92%);
+}
