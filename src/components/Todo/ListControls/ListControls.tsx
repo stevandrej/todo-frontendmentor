@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { View } from '../../../models/view';
 import { TodoContext } from '../../../store/todo-context';
 
 const ListControls: React.FC = () => {
@@ -22,9 +23,20 @@ const ListControls: React.FC = () => {
 			<div className='controls-section items-left'>{getItemsLeft()}</div>
 			<div className='controls-section view-mode'>
 				<ul>
-					<li>All</li>
-					<li>Active</li>
-					<li>Completed</li>
+					<li className={todosCtx.view === View.All ? 'active' : ''}
+						onClick={() => todosCtx.setViewMode(View.All)}>
+						All
+					</li>
+
+					<li className={todosCtx.view === View.Active ? 'active' : ''}
+						onClick={() => todosCtx.setViewMode(View.Active)}>
+						Active
+					</li>
+
+					<li className={todosCtx.view === View.Completed ? 'active' : ''}
+						onClick={() => todosCtx.setViewMode(View.Completed)}>
+						Completed
+					</li>
 				</ul>
 			</div>
 			<div className='controls-section clear-completed'>

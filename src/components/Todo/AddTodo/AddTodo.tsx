@@ -25,7 +25,7 @@ const AddTodo = () => {
 		<form onSubmit={handleSubmit}>
 			<div className='todo-item todo-item--inputform'>
 				<div><label htmlFor='checkmark-completed-input' className='checkmark'>
-					<input type="checkbox" id='checkmark-completed-input' className='checkmark__checkbox' checked={markedComplete} onClick={() => { setMarkedComplete(!markedComplete) }} />
+					<input type="checkbox" id='checkmark-completed-input' className='checkmark__checkbox' checked={markedComplete} onChange={()=>{setMarkedComplete(!markedComplete)}}  />
 					<span className='checkmark__mark'></span>
 				</label>
 				</div>

@@ -1,15 +1,13 @@
-import { count } from 'console';
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, useReducer, useState } from 'react';
 import Todo from '../models/todo';
-import reducer, { ADD_TODO, CLEAR_ALL_COMPLETED, MARK_COMPLETED, MARK_INCOMPLETED, REMOVE_TODO } from './TodoReducer';
-
-enum View {
-	All,
-	Active,
-	Completed
-}
+import { View } from '../models/view';
+import todoReducer, { ADD_TODO, CLEAR_ALL_COMPLETED, MARK_COMPLETED, MARK_INCOMPLETED, REMOVE_TODO } from './TodoReducer';
 
 interface TodoContextObj {
+	theme: string,
+	toggleTheme: () => void,
+	view: View;
+	setViewMode: (payload: View) => void;
 	todos: Todo[];
 	addTodo: (todoContent: string, markedComplete: boolean) => void;
 	removeTodo: (id: string) => void;
@@ -20,6 +18,10 @@ interface TodoContextObj {
 }
 
 export const TodoContext = createContext<TodoContextObj>({
+	theme: 'dark',
+	toggleTheme: () => { },
+	view: View.All,
+	setViewMode: () => { },
 	todos: [],
 	addTodo: () => { },
 	removeTodo: () => { },
@@ -30,7 +32,20 @@ export const TodoContext = createContext<TodoContextObj>({
 });
 
 const TodoContextProvider: React.FC = (props) => {
-	const [todos, dispatch] = useReducer(reducer, []);
+	const [theme, setTheme] = useState('dark');
+	const [view, setView] = useState(View.All);
+	const [todos, dispatch] = useReducer(todoReducer, []);
+
+	const toggleTheme = () => {
+		if (theme === 'dark')
+			setTheme('light');
+		else
+			setTheme('dark');
+	}
+
+	const setViewMode = (payload: View) => {
+		setView(payload);
+	}
 
 	const addTodoHandler = (todoContent: string, markedComplete: boolean) => {
 		const newTodo = new Todo(todoContent, markedComplete);
@@ -64,6 +79,10 @@ const TodoContextProvider: React.FC = (props) => {
 	}
 
 	const contextValue: TodoContextObj = {
+		theme: theme,
+		toggleTheme: toggleTheme,
+		view: view,
+		setViewMode: setViewMode,
 		todos: todos,
 		addTodo: addTodoHandler,
 		removeTodo: removeTodoHandler,

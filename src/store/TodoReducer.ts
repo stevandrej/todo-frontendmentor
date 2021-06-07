@@ -6,7 +6,7 @@ export const MARK_COMPLETED = 'MARK_COMPLETED';
 export const MARK_INCOMPLETED = 'MARK_INCOMPLETED';
 export const CLEAR_ALL_COMPLETED = 'CLEAR_ALL_COMPLETED';
 
-const reducer = (state: Todo[], action: { type: string; payload?: any }) => {
+const todoReducer = (state: Todo[], action: { type: string; payload?: any }) => {
 	switch (action.type) {
 		case ADD_TODO:
 			return state.concat(action.payload);
@@ -38,4 +38,4 @@ const reducer = (state: Todo[], action: { type: string; payload?: any }) => {
 	}
 }
 
-export default reducer;
+export default todoReducer;
