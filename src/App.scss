@@ -5,6 +5,7 @@
 	align-items: center;
 	min-height: 100vh;
 	background-color: var(--primary);
+	transition: background-color .3s;
 }
 
 .bg-image{
@@ -15,6 +16,7 @@
 	background-size: cover;
 	height: 35vh;
 	z-index: 1;
+	transition: background-image .3s;
 }
 
 .container{
