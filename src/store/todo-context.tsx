@@ -34,9 +34,18 @@ export const TodoContext = createContext<TodoContextObj>({
 });
 
 const TodoContextProvider: React.FC = (props) => {
+
+	const dummyItems = [new Todo('Complete online JavaScript course', true), 
+	new Todo('Joh around the park 3x', false),
+	new Todo('10 minutes meditation', false),
+	new Todo('Read for 1 hour', false),
+	new Todo('Pick up groceries', false),
+	new Todo('Complete Todo App on Frontend Mentor', false)
+];
+
 	const [theme, setTheme] = useState('dark');
 	const [view, setView] = useState(View.All);
-	const [todos, dispatch] = useReducer(todoReducer, []);
+	const [todos, dispatch] = useReducer(todoReducer, dummyItems);
 
 	const toggleTheme = () => {
 		if (theme === 'dark')
