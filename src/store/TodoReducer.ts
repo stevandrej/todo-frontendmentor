@@ -5,6 +5,7 @@ export const REMOVE_TODO = 'REMOVE_TODO';
 export const MARK_COMPLETED = 'MARK_COMPLETED';
 export const MARK_INCOMPLETED = 'MARK_INCOMPLETED';
 export const CLEAR_ALL_COMPLETED = 'CLEAR_ALL_COMPLETED';
+export const SET_REORDERED_LIST = 'SET_REORDERED_LIST';
 
 const todoReducer = (state: Todo[], action: { type: string; payload?: any }) => {
 	switch (action.type) {
@@ -32,6 +33,9 @@ const todoReducer = (state: Todo[], action: { type: string; payload?: any }) => 
 
 		case CLEAR_ALL_COMPLETED:
 			return state.filter(item => item.completed === false);
+
+		case SET_REORDERED_LIST:
+			return action.payload;
 
 		default:
 			return state;

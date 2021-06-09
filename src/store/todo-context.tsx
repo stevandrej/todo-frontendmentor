@@ -1,7 +1,7 @@
 import React, { createContext, useReducer, useState } from 'react';
 import Todo from '../models/todo';
 import { View } from '../models/view';
-import todoReducer, { ADD_TODO, CLEAR_ALL_COMPLETED, MARK_COMPLETED, MARK_INCOMPLETED, REMOVE_TODO } from './TodoReducer';
+import todoReducer, { ADD_TODO, CLEAR_ALL_COMPLETED, MARK_COMPLETED, MARK_INCOMPLETED, REMOVE_TODO, SET_REORDERED_LIST } from './TodoReducer';
 
 interface TodoContextObj {
 	theme: string,
@@ -15,6 +15,7 @@ interface TodoContextObj {
 	markIncompleted: (id: string) => void;
 	clearAllCompleted: () => void;
 	countUncompleted: () => number;
+	setReorderedList: (reorderedList: Todo[]) => void;
 }
 
 export const TodoContext = createContext<TodoContextObj>({
@@ -28,7 +29,8 @@ export const TodoContext = createContext<TodoContextObj>({
 	markCompleted: () => { },
 	markIncompleted: () => { },
 	clearAllCompleted: () => { },
-	countUncompleted: () => { return 0 }
+	countUncompleted: () => { return 0 },
+	setReorderedList: () => {}
 });
 
 const TodoContextProvider: React.FC = (props) => {
@@ -68,9 +70,13 @@ const TodoContextProvider: React.FC = (props) => {
 		dispatch({ type: CLEAR_ALL_COMPLETED })
 	}
 
+	const setReorderedList = (reorderedList: Todo[]) => {
+		dispatch({ type: SET_REORDERED_LIST, payload: reorderedList })
+	}
+
 	const countUncompleted = () => {
 		let counter = 0;
-		todos.forEach(item => {
+		todos.forEach((item: { completed: boolean; }) => {
 			if (item.completed === false)
 				counter++;
 		});
@@ -89,7 +95,8 @@ const TodoContextProvider: React.FC = (props) => {
 		markCompleted: markCompletedHandler,
 		markIncompleted: markIncompletedHandler,
 		clearAllCompleted: clearAllCompletedHandler,
-		countUncompleted: countUncompleted
+		countUncompleted: countUncompleted,
+		setReorderedList: setReorderedList
 	}
 
 	return <TodoContext.Provider value={contextValue}>
